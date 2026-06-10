@@ -1,0 +1,87 @@
+{
+  "actorSpecification": 1,
+  "name": "reddit-posts-comments-scraper",
+  "title": "Reddit Scraper - Posts & Comments (No API Key)",
+  "description": "Scrape Reddit posts and comments from any subreddit, search, or post URL. Extract titles, body text, upvotes, authors, flair, and full comment threads. No login or API key needed.",
+  "version": "1.0",
+  "categories": ["SOCIAL_MEDIA", "NEWS", "BUSINESS"],
+  "dockerfile": "Dockerfile",
+  "input": "../INPUT_SCHEMA.json",
+  "storages": {
+    "dataset": {
+      "actorSpecification": 1,
+      "views": {
+        "posts": {
+          "title": "Posts",
+          "transformation": {
+            "fields": ["postId", "title", "bodyText", "postUrl", "subredditName", "authorUsername", "upvotes", "upvoteRatio", "totalComments", "postedDate", "postType", "linkUrl", "flairText", "isNSFW", "scrapedAt"]
+          },
+          "display": {
+            "component": "table",
+            "properties": {
+              "postId": { "label": "Post ID", "format": "text" },
+              "title": { "label": "Title", "format": "text" },
+              "bodyText": { "label": "Body", "format": "text" },
+              "postUrl": { "label": "URL", "format": "link" },
+              "subredditName": { "label": "Subreddit", "format": "text" },
+              "authorUsername": { "label": "Author", "format": "text" },
+              "upvotes": { "label": "Upvotes", "format": "number" },
+              "upvoteRatio": { "label": "Upvote %", "format": "number" },
+              "totalComments": { "label": "Comments", "format": "number" },
+              "postedDate": { "label": "Posted", "format": "date" },
+              "postType": { "label": "Type", "format": "text" },
+              "linkUrl": { "label": "Link", "format": "link" },
+              "flairText": { "label": "Flair", "format": "text" },
+              "isNSFW": { "label": "NSFW", "format": "boolean" },
+              "scrapedAt": { "label": "Scraped At", "format": "text" }
+            }
+          }
+        },
+        "comments": {
+          "title": "Comments",
+          "transformation": {
+            "fields": ["commentId", "postId", "bodyText", "authorUsername", "upvotes", "postedDate", "parentCommentId", "depth", "scrapedAt"]
+          },
+          "display": {
+            "component": "table",
+            "properties": {
+              "commentId": { "label": "Comment ID", "format": "text" },
+              "postId": { "label": "Post ID", "format": "text" },
+              "bodyText": { "label": "Body", "format": "text" },
+              "authorUsername": { "label": "Author", "format": "text" },
+              "upvotes": { "label": "Upvotes", "format": "number" },
+              "postedDate": { "label": "Posted", "format": "date" },
+              "parentCommentId": { "label": "Parent", "format": "text" },
+              "depth": { "label": "Depth", "format": "number" },
+              "scrapedAt": { "label": "Scraped At", "format": "text" }
+            }
+          }
+        }
+      }
+    }
+  },
+  "pricingInfo": {
+    "pricingModel": "PAY_PER_EVENT",
+    "pricingPerEvent": {
+      "actorChargeEvents": {
+        "post-scraped": {
+          "eventTitle": "Post Scraped",
+          "eventDescription": "Charged for each Reddit post extracted and saved to the dataset.",
+          "eventPriceUsd": 0.002
+        },
+        "comment-scraped": {
+          "eventTitle": "Comment Scraped",
+          "eventDescription": "Charged for each Reddit comment extracted and saved to the dataset.",
+          "eventPriceUsd": 0.002
+        }
+      }
+    }
+  },
+  "defaultRunOptions": {
+    "build": "latest",
+    "memoryMbytes": 1024,
+    "timeoutSecs": 3600
+  },
+  "minMemoryMbytes": 256,
+  "maxMemoryMbytes": 4096
+}

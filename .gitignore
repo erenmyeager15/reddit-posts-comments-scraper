@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.crawlee/
+apify_storage/
+storage/
+*.log
+.env
+.env.*
+.DS_Store
+Thumbs.db
+*.tgz
+coverage/

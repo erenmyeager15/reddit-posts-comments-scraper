@@ -1,0 +1,83 @@
+{
+  "title": "Reddit Posts & Comments Scraper",
+  "description": "Scrape Reddit posts and comments from subreddits, searches, or direct post URLs. No login or API key required.",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "subreddits": {
+      "title": "Subreddits",
+      "description": "Subreddit names to scrape (without the r/ prefix), e.g. \"technology\", \"programming\".",
+      "type": "array",
+      "editor": "stringList",
+      "prefill": ["programming"],
+      "default": ["programming"]
+    },
+    "keywords": {
+      "title": "Search Keywords",
+      "description": "Keywords to search across Reddit. Each keyword runs a Reddit search.",
+      "type": "array",
+      "editor": "stringList",
+      "default": []
+    },
+    "postUrls": {
+      "title": "Direct Post URLs",
+      "description": "Reddit post URLs to scrape directly (from reddit.com or old.reddit.com).",
+      "type": "array",
+      "editor": "stringList",
+      "default": []
+    },
+    "sortBy": {
+      "title": "Sort By",
+      "description": "How to sort posts when scraping subreddits or searches.",
+      "type": "string",
+      "editor": "select",
+      "default": "hot",
+      "enum": ["hot", "new", "top", "rising"],
+      "enumTitles": ["Hot", "New", "Top", "Rising"]
+    },
+    "timeFilter": {
+      "title": "Time Filter",
+      "description": "Time range when using 'Top' sort. Ignored for other sorts.",
+      "type": "string",
+      "editor": "select",
+      "default": "all",
+      "enum": ["hour", "day", "week", "month", "year", "all"],
+      "enumTitles": ["Past Hour", "Past Day", "Past Week", "Past Month", "Past Year", "All Time"]
+    },
+    "maxPostsPerSubreddit": {
+      "title": "Max Posts Per Source",
+      "description": "Maximum posts to scrape per subreddit or search query.",
+      "type": "integer",
+      "editor": "number",
+      "default": 50,
+      "minimum": 1,
+      "maximum": 5000
+    },
+    "maxCommentsPerPost": {
+      "title": "Max Comments Per Post",
+      "description": "Maximum comments to extract per post. Set to 0 to skip comments entirely.",
+      "type": "integer",
+      "editor": "number",
+      "default": 10,
+      "minimum": 0,
+      "maximum": 1000
+    },
+    "skipNSFW": {
+      "title": "Skip NSFW Content",
+      "description": "If enabled, NSFW (over-18) posts are excluded.",
+      "type": "boolean",
+      "editor": "checkbox",
+      "default": true
+    },
+    "proxyConfiguration": {
+      "title": "Proxy Configuration",
+      "description": "Reddit blocks datacenter IPs on its JSON endpoints, so residential proxies are strongly recommended.",
+      "type": "object",
+      "editor": "proxy",
+      "default": {
+        "useApifyProxy": true,
+        "apifyProxyGroups": ["RESIDENTIAL"]
+      }
+    }
+  }
+}

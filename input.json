@@ -1,0 +1,10 @@
+{
+  "subreddits": ["technology"],
+  "keywords": [],
+  "postUrls": [],
+  "sortBy": "hot",
+  "timeFilter": "all",
+  "maxPostsPerSubreddit": 10,
+  "maxCommentsPerPost": 5,
+  "skipNSFW": true
+}
