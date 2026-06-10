@@ -82,7 +82,7 @@ const crawler = new HttpCrawler({
     requestHandler: router,
     additionalMimeTypes: ['application/json', 'text/html'],
     maxConcurrency: 10,
-    maxRequestRetries: 8,
+    maxRequestRetries: 3,
     requestHandlerTimeoutSecs: 90,
     retryOnBlocked: true,
     sessionPoolOptions: {
