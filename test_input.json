@@ -1,0 +1,10 @@
+{
+  "subreddits": ["programming"],
+  "keywords": [],
+  "postUrls": [],
+  "sortBy": "hot",
+  "maxPostsPerSubreddit": 3,
+  "maxCommentsPerPost": 3,
+  "skipNSFW": true,
+  "proxyConfiguration": { "useApifyProxy": true, "apifyProxyGroups": ["RESIDENTIAL"] }
+}
