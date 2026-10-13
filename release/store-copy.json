@@ -1,0 +1,14 @@
+{
+  "status": "release_prepared_not_published",
+  "title": "Reddit Customer Research & Competitor Insights",
+  "description": "Analyze licensed Reddit CSV/JSON exports for US SaaS and brand research. Find pain-point phrases, feature-request cues and competitor mentions; audit supplied threads and compare snapshots. Get five CSV reports, JSON and a summary. No live scraping, proxy or AI calls.",
+  "seoTitle": "Reddit Customer Research & Competitor Insights",
+  "seoDescription": "Analyze licensed Reddit CSV/JSON for US SaaS and brand research. Pain-point cues, competitor mentions, thread audits and snapshot reports. No live scraping.",
+  "migrationNotice": "Live collection is retired. This Actor analyzes licensed CSV/JSON exports or labeled invented demos. Existing subreddit/search/proxy tasks must be replaced; no live Reddit access is included.",
+  "identityPolicy": "Retain the existing slug, disclose the changed scope and do not transfer another Actor's reputation, reviews or rankings. No duplicate Actor or account is created.",
+  "runtimeScope": "Imported posts/comments licensed for commercial processing here, or owner-invented synthetic previews. US identifies the research audience; no country inference or guaranteed search ranking.",
+  "livePricing": "$2/1,000 unique confirmed saved imported post/comment analyses plus $0.001 automatic start per run. No additional dataset fee or discounts; platform usage is included. Demos charge only the start event, not result events. The $0.003 minimum spending-cap setting is not another fee. Actual billing passed four private checks; do not change pricing through copy or the build manifest.",
+  "iconFile": "assets/reddit-customer-insights-avatar-v1.png",
+  "iconProvenance": "Original built-in image generation; no Reddit/Snoo or Apify logo, endorsement or personal account-photo change.",
+  "releaseGate": "Owner approved one final documentation/metadata build, then conditional publication after exact source/README verification and Git CI. No new Actor runs or pricing changes. Prepared source metadata is not a live deployment receipt."
+}

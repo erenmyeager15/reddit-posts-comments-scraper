@@ -1,57 +1,30 @@
-export interface ActorInput {
-    subreddits?: string[];
-    keywords?: string[];
-    postUrls?: string[];
-    sortBy?: 'hot' | 'new' | 'top' | 'rising';
-    timeFilter?: 'hour' | 'day' | 'week' | 'month' | 'year' | 'all';
-    maxPostsPerSubreddit?: number;
-    maxCommentsPerPost?: number;
-    skipNSFW?: boolean;
-    proxyConfiguration?: {
-        useApifyProxy?: boolean;
-        apifyProxyGroups?: string[];
-        proxyUrls?: string[];
-    };
+export type RecordType = 'post' | 'comment';
+export type DemoPreset = 'us-saas-research' | 'us-brand-comparison' | 'us-thread-quality';
+export type Signal = 'pain-point-phrase' | 'feature-request-phrase' | 'recommendation-question' | 'switching-phrase' | 'pricing-question' | 'question';
+export interface ResearchInput {
+    mode: 'demo' | 'import'; demoPreset: DemoPreset; maxRecords: number; skipNSFW: boolean;
+    watchTerms: string[]; comparisonWindowDays: number; removedRecordKeys: string[];
 }
-
-export interface PostRecord {
-    postId: string;
-    title: string | null;
-    bodyText: string | null;
-    postUrl: string;
-    subredditName: string | null;
-    authorUsername: string | null;
-    authorKarma: number | null;
-    upvotes: number | null;
-    upvoteRatio: number | null;
-    totalComments: number | null;
-    awardsCount: number | null;
-    postedDate: string | null;
-    postType: string | null;
-    linkUrl: string | null;
-    thumbnailUrl: string | null;
-    flairText: string | null;
-    isPinned: boolean;
-    isSpoiler: boolean;
-    isNSFW: boolean;
-    crosspostCount: number | null;
-    scrapedAt: string;
+export interface Observation {
+    recordKey: string; recordType: RecordType; postId: string; commentId: string | null;
+    subreddit: string | null; title: string | null; bodyText: string | null;
+    createdAt: string; observedAt: string; score: number | null; scoreBasis: 'reported-score' | 'reported-upvotes' | null;
+    declaredCommentCount: number | null; parentCommentId: string | null; parentKnown: boolean;
+    isNSFW: boolean | null; contentState: 'active' | 'deleted' | 'removed';
 }
-
-export interface CommentRecord {
-    commentId: string;
-    postId: string;
-    bodyText: string | null;
-    authorUsername: string | null;
-    upvotes: number | null;
-    postedDate: string | null;
-    parentCommentId: string | null;
-    depth: number;
-    isGilded: boolean;
-    isEdited: boolean;
-    scrapedAt: string;
+export interface ResearchRecord {
+    recordKey: string; recordType: RecordType; postId: string; commentId: string | null;
+    subreddit: string | null; title: string | null; bodyText: string | null;
+    createdAt: string; observedAt: string; score: number | null; scoreBasis: Observation['scoreBasis'];
+    declaredCommentCount: number | null; parentCommentId: string | null; parentKnown: boolean; isNSFW: boolean | null;
+    observations: Observation[]; signals: Signal[]; mentions: string[];
+    source: 'authorized-export' | 'synthetic-demo'; isSynthetic: boolean; dataProvider: string; importedAt: string;
+    sourceRightsVerified: false; liveSourceVerified: false; authorFieldsIncluded: false;
 }
-
-export type SortByOption = 'hot' | 'new' | 'top' | 'rising';
-
-export type TimeFilterOption = 'hour' | 'day' | 'week' | 'month' | 'year' | 'all';
+export interface ImportPlan {
+    records: ResearchRecord[]; allEligibleKeys: string[]; inputRows: number; normalizedObservations: number;
+    duplicateObservations: number; excludedDeletedRecords: number; excludedNSFWRecords: number;
+    excludedRemovedThreadRecords: number; eligibleRecords: number; omittedRecords: number; unsupportedColumnsDropped: number;
+    dataProvider: string;
+}
+export interface SaveAcknowledgment { chargedCount: number; eventChargeLimitReached: boolean; }

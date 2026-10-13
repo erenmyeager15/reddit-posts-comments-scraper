@@ -1,0 +1,37 @@
+{
+  "actorName": "reddit-posts-comments-scraper",
+  "publicationStatus": "release_prepared_not_published",
+  "examples": [
+    {
+      "name": "us-saas-customer-research-demo",
+      "title": "US SaaS Customer Research — Synthetic Preview",
+      "description": "Preview invented pain-point phrases, feature-request cues and recommendation questions for US product research. Not real Reddit data, customers, location or verified intent. Charges $0.001/start with zero dataset/result events; usage is included, not a free run. Real imports need licensed exports and explicit rights confirmation.",
+      "inputFile": "examples/us-saas-research.json",
+      "visibleFields": [
+        "demoPreset",
+        "watchTerms"
+      ]
+    },
+    {
+      "name": "us-brand-mention-comparison-demo",
+      "title": "US Brand Mention Comparison — Synthetic Preview",
+      "description": "Compare AtlasApp and NimbusApp in an invented post/comment sample. Literal per-record mentions, not market share, sentiment or real customer evidence. No live lookup, AI call or result events. Charges $0.001/start; usage is included, not a free run. Bring a commercially licensed export for actual analysis.",
+      "inputFile": "examples/us-brand-comparison.json",
+      "visibleFields": [
+        "demoPreset",
+        "watchTerms"
+      ]
+    },
+    {
+      "name": "us-thread-quality-snapshot-demo",
+      "title": "US Thread Quality & Snapshot Audit — Synthetic Preview",
+      "description": "Inspect invented missing parents, cycles, stale comment times and supplied score/count changes. Not complete live threads, growth proof, cross-run history or monitoring. Charges $0.001/start with zero dataset/result events; usage is included, not a free run. Real analysis requires an authorized export.",
+      "inputFile": "examples/us-thread-quality.json",
+      "visibleFields": [
+        "demoPreset",
+        "watchTerms",
+        "comparisonWindowDays"
+      ]
+    }
+  ]
+}

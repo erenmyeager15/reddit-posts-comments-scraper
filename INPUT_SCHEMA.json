@@ -1,83 +1,109 @@
 {
-  "title": "Reddit Posts & Comments Scraper",
-  "description": "Scrape Reddit posts and comments from subreddits, searches, or direct post URLs. No login or API key required.",
+  "title": "US Customer Research — Authorized Export or Synthetic Demo",
+  "description": "Analyze licensed post/comment CSV or JSON, or preview invented developer examples. No Reddit fetching, API, proxy or AI. Imported data and derived analysis must be authorized for this paid service. The Actor does not verify or grant those rights.",
   "type": "object",
   "schemaVersion": 1,
+  "required": [
+    "mode"
+  ],
   "properties": {
-    "subreddits": {
-      "title": "Subreddits",
-      "description": "Subreddit names to scrape (without the r/ prefix), e.g. \"technology\", \"programming\".",
-      "type": "array",
-      "editor": "stringList",
-      "prefill": ["programming"],
-      "default": ["programming"]
-    },
-    "keywords": {
-      "title": "Search Keywords",
-      "description": "Keywords to search across Reddit. Each keyword runs a Reddit search.",
-      "type": "array",
-      "editor": "stringList",
-      "default": []
-    },
-    "postUrls": {
-      "title": "Direct Post URLs",
-      "description": "Reddit post URLs to scrape directly (from reddit.com or old.reddit.com).",
-      "type": "array",
-      "editor": "stringList",
-      "default": []
-    },
-    "sortBy": {
-      "title": "Sort By",
-      "description": "How to sort posts when scraping subreddits or searches.",
+    "mode": {
+      "title": "Data mode",
       "type": "string",
       "editor": "select",
-      "default": "hot",
-      "enum": ["hot", "new", "top", "rising"],
-      "enumTitles": ["Hot", "New", "Top", "Rising"]
+      "enum": [
+        "demo",
+        "import"
+      ],
+      "enumTitles": [
+        "Synthetic demo — invented, not live Reddit data",
+        "Authorized CSV/JSON import — no live lookup"
+      ],
+      "prefill": "demo",
+      "description": "Choose explicitly. Legacy subreddit/search/post URL/proxy inputs receive a migration error. Demos save zero dataset rows and request no post/comment result events, but platform usage and any configured start fee still apply."
     },
-    "timeFilter": {
-      "title": "Time Filter",
-      "description": "Time range when using 'Top' sort. Ignored for other sorts.",
+    "demoPreset": {
+      "title": "Labeled US research preview",
       "type": "string",
       "editor": "select",
-      "default": "all",
-      "enum": ["hour", "day", "week", "month", "year", "all"],
-      "enumTitles": ["Past Hour", "Past Day", "Past Week", "Past Month", "Past Year", "All Time"]
+      "enum": [
+        "us-saas-research",
+        "us-brand-comparison",
+        "us-thread-quality"
+      ],
+      "enumTitles": [
+        "SaaS pain points and feature-request cues",
+        "Literal brand mentions in a supplied sample",
+        "Thread quality and supplied snapshot changes"
+      ],
+      "default": "us-saas-research",
+      "description": "Invented posts, comments, brands and subreddit. Not source access, real customers, location or verified intent. US describes the workflow audience, not users' locations. Ignored in import mode."
     },
-    "maxPostsPerSubreddit": {
-      "title": "Max Posts Per Source",
-      "description": "Maximum posts to scrape per subreddit or search query.",
-      "type": "integer",
-      "editor": "number",
-      "default": 50,
-      "minimum": 1,
-      "maximum": 5000
+    "importJson": {
+      "title": "Licensed observations — JSON array as text",
+      "type": "string",
+      "editor": "textarea",
+      "isSecret": true,
+      "description": "Import only. Paste a flat JSON ARRAY as text; exactly one nonempty JSON/CSV import. Maximum 2 MiB, 1,000 observations and 500 unique IDs. Required: recordType, postId, createdAt, observedAt, plus title for posts or commentId/bodyText for comments. See README. No URLs or files are fetched."
     },
-    "maxCommentsPerPost": {
-      "title": "Max Comments Per Post",
-      "description": "Maximum comments to extract per post. Set to 0 to skip comments entirely.",
-      "type": "integer",
-      "editor": "number",
-      "default": 10,
-      "minimum": 0,
-      "maximum": 1000
+    "importCsv": {
+      "title": "Licensed observations — CSV text with header",
+      "type": "string",
+      "editor": "textarea",
+      "isSecret": true,
+      "description": "Import only. Maximum 2 MiB, 1,000 data rows, 40 columns and 500 unique IDs. Quoted multiline fields supported. Use UTC dates/timestamps and integer scores without formulae, ranges or shorthand. Supply safe isNSFW flags or a safe root post for comments. Never submit private messages, credentials or personal profiles."
     },
-    "skipNSFW": {
-      "title": "Skip NSFW Content",
-      "description": "If enabled, NSFW (over-18) posts are excluded.",
+    "importSource": {
+      "title": "Authorized export provider label",
+      "type": "string",
+      "editor": "textfield",
+      "description": "Required for import; 1–160 characters. Identify your licensed export. Do not put names, contact information or secrets here. A source label is not proof of rights, accuracy, freshness or a Reddit commercial agreement. Leave blank in demo."
+    },
+    "authorizedData": {
+      "title": "This export and derived analysis are licensed for this paid service",
       "type": "boolean",
       "editor": "checkbox",
-      "default": true
+      "default": false,
+      "description": "Required TRUE for import only; never auto-confirmed by an example. Public visibility, a Reddit/API account, another scraper's output or this checkbox do not grant permission. Your license must cover commercial processing here and applicable redistribution, privacy and deletion requirements. Leave unchecked for demo."
     },
-    "proxyConfiguration": {
-      "title": "Proxy Configuration",
-      "description": "Reddit blocks datacenter IPs on its JSON endpoints, so residential proxies are strongly recommended.",
-      "type": "object",
-      "editor": "proxy",
-      "default": {
-        "useApifyProxy": true,
-        "apifyProxyGroups": ["RESIDENTIAL"]
-      }
+    "maxRecords": {
+      "title": "Maximum selected unique posts/comments",
+      "type": "integer",
+      "editor": "number",
+      "minimum": 1,
+      "maximum": 500,
+      "default": 100,
+      "description": "Combined post/comment cap, not per subreddit or observation. First-seen eligible IDs are selected after full validation. Each saved ID includes its supplied snapshots. Omitted records are not saved or billed; caps can leave incomplete parent/thread evidence. Demo uses this cap for preview only and has zero dataset rows."
+    },
+    "watchTerms": {
+      "title": "Literal product or brand terms",
+      "type": "array",
+      "editor": "stringList",
+      "default": [],
+      "description": "Optional: up to 10 unique non-sensitive literal terms, 2–40 characters each. Case-insensitive boundary matching in the latest supplied text. Counts are per selected record, not market share, sentiment, unique people or verified buying intent. Do not enter names, usernames, contacts or sensitive-group labels."
+    },
+    "comparisonWindowDays": {
+      "title": "Supplied snapshot comparison window — days",
+      "type": "integer",
+      "editor": "number",
+      "minimum": 1,
+      "maximum": 365,
+      "default": 30,
+      "description": "Compare the earliest earlier observation within this gap to the latest observation for the same ID. Score deltas require a matching supplied metric basis. No live checking, cross-run history, forecast or notification. Scores may be fuzzed."
+    },
+    "skipNSFW": {
+      "title": "Exclude unsafe or unknown-NSFW supplied records",
+      "type": "boolean",
+      "editor": "checkbox",
+      "default": true,
+      "description": "Default true excludes explicit NSFW at any supplied time and unknown flags, unless a comment inherits a safe root. Root flags protect dependent comments. False permits unknown/flagged exports; it is not authorization to submit sexually explicit or otherwise prohibited content."
+    },
+    "removedRecordKeys": {
+      "title": "Supplied deletion/takedown keys for this run",
+      "type": "array",
+      "editor": "stringList",
+      "default": [],
+      "description": "Import only: up to 1,000 t3_postId / t1_commentId keys. Suppresses that ID and its supplied history; removed roots suppress comments in their supplied thread. Does not discover new Reddit deletions or erase previous datasets, INPUT, reports or downloads. Purge affected historical copies separately. Leave empty in demo."
     }
   }
 }

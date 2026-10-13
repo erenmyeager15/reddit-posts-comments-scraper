@@ -1,23 +1,28 @@
 {
   "name": "reddit-posts-comments-scraper",
-  "version": "1.0.0",
-  "description": "Apify Actor that scrapes Reddit posts and comments via the public JSON API",
+  "version": "1.1.0",
+  "description": "Authorized Reddit export analysis and labeled synthetic US customer research reports; no live collection",
   "type": "module",
   "main": "dist/main.js",
   "scripts": {
     "start": "node dist/main.js",
     "build": "tsc",
-    "lint": "tsc --noEmit"
+    "lint": "tsc --noEmit",
+    "test": "npm run build && node --test dist/*.test.js",
+    "audit:prod": "npm audit --omit=dev --audit-level=moderate"
   },
-  "keywords": ["apify", "reddit", "scraper", "crawlee"],
+  "keywords": ["apify", "reddit", "customer-research", "us-saas", "authorized-exports", "voice-of-customer"],
   "author": "",
   "license": "Apache-2.0",
   "dependencies": {
-    "apify": "^3.2.0",
-    "crawlee": "^3.11.0"
+    "@apify/input_secrets": "^1.2.43",
+    "apify": "^3.4.4"
   },
   "devDependencies": {
     "typescript": "^5.4.0"
+  },
+  "overrides": {
+    "basic-ftp": "6.2.3"
   },
   "engines": {
     "node": ">=20.0.0"

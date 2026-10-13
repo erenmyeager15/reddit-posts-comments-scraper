@@ -1,38 +1,33 @@
-# Reddit Posts & Comments Scraper - Resume Notes (PARKED)
+# Reddit Customer Research & Competitor Insights — release evidence
 
-**Status:** Parked. Code is complete and correct for Reddit's public JSON API, but Reddit now
-**hard-blocks unauthenticated `.json` endpoints** from all proxy/datacenter IPs (and even Apify
-residential), returning HTTP 403. Verified on home IP and Apify residential with full browser
-fingerprints — all 403. The only reliable path is the **official OAuth API**.
+Scope selected by the owner on October 13, 2026: commercially licensed CSV/JSON analysis and clearly labeled synthetic demos. No live Reddit collection, API, proxy, author profiles, AI calls or schedules. Retain the existing Actor identity and disclose the retired collector; do not create duplicates, manufactured users/reviews or transferred reputation.
 
-## What was confirmed
-- `https://www.reddit.com/r/{sub}/{sort}.json` → 403 from every IP/proxy + header combo tested.
-- Reddit also gated **app creation** behind their Responsible Builder Policy (registration), so
-  free OAuth credentials weren't obtained.
+Actor: uAW4FY6lk1CD6n5xW, fascinating_lentil/reddit-posts-comments-scraper. Repository: erenmyeager15/reddit-posts-comments-scraper, main. Original 1.0.4 remains recoverable; do not mistake it for the tested redesign.
 
-## What it needs to ship
-1. **Reddit OAuth app credentials** (client ID + secret), type "script", from
-   reddit.com/prefs/apps (subject to Reddit's Responsible Builder Policy / registration).
-2. Implement OAuth in `src/main.ts`:
-   - Get a token: `POST https://www.reddit.com/api/v1/access_token`
-     with HTTP Basic auth (`clientId:secret`), body
-     `grant_type=client_credentials` (app-only) or the installed_client grant.
-     Header `User-Agent: <unique descriptive UA>`.
-   - Call data endpoints on **`https://oauth.reddit.com`** with `Authorization: bearer <token>`
-     (e.g. `https://oauth.reddit.com/r/{sub}/{sort}?limit=100&raw_json=1`).
-   - Same JSON response shape as the current parser in `src/routes.ts`, so only the request
-     layer changes — `mapPost` / `mapComment` / `flattenComments` are reusable as-is.
-3. Add `clientId` / `clientSecret` input fields (or embed the actor owner's app creds so end
-   users need nothing — the "no API key" model).
-4. Respect Reddit rate limits (~100 requests/min per OAuth client).
+## Verified evidence
 
-## Current safe behavior
-- `HttpCrawler` hits the public `.json` endpoints via residential proxy with session rotation.
-- `maxRequestRetries: 3` so blocked runs fail fast and cheap (no wasted credits).
-- Data guard: charges only per pushed post/comment, so blocked/empty runs charge nothing.
+- 151 local tests, lint/build, all schemas and a zero-vulnerability production audit passed. Fourteen network-blocked compiled checks include 500 IDs/1,000 observations, near-2 MiB JSON/CSV, encryption and error cases. Large distinct-record throughput was tested locally, not at that scale in the cloud.
+- Seven private unpriced 256 MB checks passed on 1.1.1 / EgeKA8CVYS2s29b7l. Peak cloud memory 48.21 MiB. Approval call_05c7f21f2e6d41baa2f578730a79e418 is fully consumed.
+- Private policy: $2/1,000 confirmed saved imported post/comment analyses plus $0.001 automatic start, developer-paid usage, no extra dataset event or discount. A $0.003 minimum user spending-cap setting is not another charge or minimum actual fee.
+- Four actual private billing checks passed on 1.1.2 / sqhqzPQw9iZr7ro9V: demo, one-post JSON, mixed CSV and cap-limited partial import. Exact counters, encrypted inputs, complete report artifacts and uncharged omitted comment verified. Approval call_e703f9a114aa441ea7e9aae2e551acb1 is fully consumed.
+- Measured recurring margins: approximately +30.4%, +63.4%, +70.2% and +63.9%, after 20% share and full usage, with no compute-waiver credit. These are owner QA models, not organic customer revenue or overall profit. Licensing, support, builds, acquisition and maintenance remain separate.
+- Name, description, custom SEO and original Actor icon were saved privately and read back through the API. Personal account photo unchanged. Asset provenance/prompt: assets/README.md.
 
-## Reusable assets (no rework needed once OAuth is added)
-- `src/routes.ts` - full JSON parsing: posts, nested comments (depth), pagination via `after`.
-- `src/types.ts` - PostRecord / CommentRecord.
-- `.actor/actor.json` - PAY_PER_EVENT (`post-scraped` + `comment-scraped` @ $0.002), dataset views.
-- `INPUT_SCHEMA.json` - inputs (subreddits / keywords / postUrls / sort / filters / proxy).
+## Final release authorization and receipts
+
+call_oohnxu1bly7T9sS4hMR4nPuc permits one final documentation/metadata build with a $0.03 soft target and conditional GitHub push/publication. Reuse unchanged runtime/billing evidence. No extra Actor runs, live requests, proxies, schedules or extra builds. Publish the reviewed import/demo offering, tested 256 MB/90-second defaults and three labeled US examples only after compiled source/README, exact Git CI, icon/SEO and retained billing checks pass. Prices/cap policy unchanged. Stop on failure; delayed billing prevents a hard cap.
+
+This file describes the prepared package, not dynamic deployment status. Read current generated receipts outside the repository before acting:
+
+- ../outputs/reddit-us-research-2026-10-13/final-review.json
+- ../outputs/reddit-us-research-2026-10-13/final-release.json
+- ../outputs/reddit-us-research-2026-10-13/examples-receipt.json
+- ../reports/reddit-us-export-redesign-2026-10-13.md
+
+Use a dispatched operation's saved ID/status; never repeat consumed work or failed publication blindly. Public release requires the exact verified package and successful Git check, not these notes.
+
+## Source rights and limitations
+
+Provider label/rights checkbox declare rights; they do not establish a Reddit commercial agreement. Do not process third-party content without rights covering this service and derived outputs. No AI training, author targeting or surveillance. Pattern redaction is not complete anonymization; omission from output does not erase INPUT. Supplied deletion markers suppress this run only, not prior runs/downloads.
+
+US is the intended audience, not inferred author location. Reports use phrase cues, literal terms and supplied snapshot/thread evidence, not sentiment, market share, validated buying intent, fresh growth or guaranteed complete threads. Invented demos have zero dataset/result events, a $0.001 start and no real customer evidence. No profit, ranking or conversion guarantee for future workloads.

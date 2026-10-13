@@ -1,0 +1,53 @@
+{
+  "actorOutputSchemaVersion": 1,
+  "title": "US Customer Research Reports — Supplied Evidence Only",
+  "description": "Read RUN_STATUS first for completeness, provenance and event counters. Synthetic demos have zero dataset rows; their invented records are in REPORT. Imports analyze confirmed saved IDs only. No live source/rights verification, personal profiles, AI calls or cross-run history.",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string",
+      "title": "Run status, exclusions, completeness and charges",
+      "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/RUN_STATUS"
+    },
+    "report": {
+      "type": "string",
+      "title": "Full JSON research report — check synthetic/source label",
+      "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/REPORT"
+    },
+    "insightsCsv": {
+      "type": "string",
+      "title": "Phrase cues, mentions and supplied parent depth — CSV",
+      "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/INSIGHTS.csv"
+    },
+    "threadsCsv": {
+      "type": "string",
+      "title": "Thread evidence and count-quality checks — CSV",
+      "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/THREADS.csv"
+    },
+    "mentionsCsv": {
+      "type": "string",
+      "title": "Literal product/brand mention comparisons — CSV",
+      "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/MENTIONS.csv"
+    },
+    "changesCsv": {
+      "type": "string",
+      "title": "Supplied score, comment-count and text differences — CSV",
+      "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/CHANGES.csv"
+    },
+    "qualityCsv": {
+      "type": "string",
+      "title": "Missing evidence, parent cycles and quality warnings — CSV",
+      "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/QUALITY.csv"
+    },
+    "markdown": {
+      "type": "string",
+      "title": "Readable research summary and limitations",
+      "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/REPORT.md"
+    },
+    "savedRecords": {
+      "type": "string",
+      "title": "Saved normalized imports — empty for synthetic demos",
+      "template": "{{links.apiDefaultDatasetUrl}}/items"
+    }
+  }
+}

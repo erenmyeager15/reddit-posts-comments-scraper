@@ -1,0 +1,8 @@
+{
+  "mode": "demo",
+  "demoPreset": "us-saas-research",
+  "watchTerms": [
+    "AtlasApp",
+    "NimbusApp"
+  ]
+}

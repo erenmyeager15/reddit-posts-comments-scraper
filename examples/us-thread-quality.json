@@ -1,0 +1,9 @@
+{
+  "mode": "demo",
+  "demoPreset": "us-thread-quality",
+  "watchTerms": [
+    "AtlasApp",
+    "NimbusApp"
+  ],
+  "comparisonWindowDays": 30
+}

@@ -1,10 +1,9 @@
 {
-  "subreddits": ["programming"],
-  "keywords": [],
-  "postUrls": [],
-  "sortBy": "hot",
-  "maxPostsPerSubreddit": 3,
-  "maxCommentsPerPost": 3,
-  "skipNSFW": true,
-  "proxyConfiguration": { "useApifyProxy": true, "apifyProxyGroups": ["RESIDENTIAL"] }
+  "mode": "demo",
+  "demoPreset": "us-thread-quality",
+  "watchTerms": [
+    "AtlasApp",
+    "NimbusApp"
+  ],
+  "comparisonWindowDays": 30
 }

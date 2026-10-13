@@ -1,0 +1,261 @@
+{
+  "actorSpecification": 1,
+  "fields": {
+    "type": "object",
+    "properties": {
+      "recordKey": {
+        "type": "string",
+        "title": "Unique supplied record"
+      },
+      "recordType": {
+        "type": "string",
+        "title": "Post/comment"
+      },
+      "postId": {
+        "type": "string",
+        "title": "Thread/post ID"
+      },
+      "commentId": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "title": "Comment ID"
+      },
+      "subreddit": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "title": "Supplied community"
+      },
+      "title": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "title": "Latest redacted title"
+      },
+      "bodyText": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "title": "Latest redacted body"
+      },
+      "createdAt": {
+        "type": "string",
+        "title": "Supplied creation time"
+      },
+      "observedAt": {
+        "type": "string",
+        "title": "Latest supplied observation time"
+      },
+      "score": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "title": "Supplied score/upvotes"
+      },
+      "scoreBasis": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "title": "Metric basis"
+      },
+      "declaredCommentCount": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "title": "Supplied declared comment count"
+      },
+      "parentCommentId": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "title": "Supplied parent comment"
+      },
+      "parentKnown": {
+        "type": "boolean",
+        "title": "Parent explicitly specified"
+      },
+      "isNSFW": {
+        "type": [
+          "boolean",
+          "null"
+        ],
+        "title": "Supplied NSFW flag"
+      },
+      "signals": {
+        "type": "array",
+        "title": "Rule-based textual cues"
+      },
+      "mentions": {
+        "type": "array",
+        "title": "Literal watch terms"
+      },
+      "observations": {
+        "type": "array",
+        "title": "Supplied redacted observations"
+      },
+      "source": {
+        "type": "string",
+        "title": "Provenance"
+      },
+      "isSynthetic": {
+        "type": "boolean",
+        "title": "Synthetic"
+      },
+      "dataProvider": {
+        "type": "string",
+        "title": "User source label"
+      },
+      "importedAt": {
+        "type": "string",
+        "title": "Import time"
+      },
+      "sourceRightsVerified": {
+        "type": "boolean",
+        "title": "Rights verified (always false)"
+      },
+      "liveSourceVerified": {
+        "type": "boolean",
+        "title": "Live source verified (always false)"
+      },
+      "authorFieldsIncluded": {
+        "type": "boolean",
+        "title": "Author fields included (always false)"
+      }
+    }
+  },
+  "views": {
+    "research": {
+      "title": "Saved import research — no live lookup",
+      "transformation": {
+        "fields": [
+          "recordKey",
+          "recordType",
+          "source",
+          "subreddit",
+          "title",
+          "bodyText",
+          "score",
+          "scoreBasis",
+          "observedAt",
+          "signals",
+          "mentions"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "recordKey": {
+            "label": "Unique supplied record",
+            "format": "text"
+          },
+          "recordType": {
+            "label": "Post/comment",
+            "format": "text"
+          },
+          "source": {
+            "label": "Provenance",
+            "format": "text"
+          },
+          "subreddit": {
+            "label": "Supplied community",
+            "format": "text"
+          },
+          "title": {
+            "label": "Latest redacted title",
+            "format": "text"
+          },
+          "bodyText": {
+            "label": "Latest redacted body",
+            "format": "text"
+          },
+          "score": {
+            "label": "Supplied score/upvotes",
+            "format": "number"
+          },
+          "scoreBasis": {
+            "label": "Metric basis",
+            "format": "text"
+          },
+          "observedAt": {
+            "label": "Latest supplied observation time",
+            "format": "date"
+          },
+          "signals": {
+            "label": "Rule-based textual cues",
+            "format": "array"
+          },
+          "mentions": {
+            "label": "Literal watch terms",
+            "format": "array"
+          }
+        }
+      }
+    },
+    "evidence": {
+      "title": "Supplied snapshot and relationship evidence",
+      "transformation": {
+        "fields": [
+          "recordKey",
+          "postId",
+          "commentId",
+          "parentCommentId",
+          "parentKnown",
+          "dataProvider",
+          "observations",
+          "sourceRightsVerified",
+          "liveSourceVerified"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "recordKey": {
+            "label": "Unique supplied record",
+            "format": "text"
+          },
+          "postId": {
+            "label": "Thread/post ID",
+            "format": "text"
+          },
+          "commentId": {
+            "label": "Comment ID",
+            "format": "text"
+          },
+          "parentCommentId": {
+            "label": "Supplied parent comment",
+            "format": "text"
+          },
+          "parentKnown": {
+            "label": "Parent explicitly specified",
+            "format": "boolean"
+          },
+          "dataProvider": {
+            "label": "User source label",
+            "format": "text"
+          },
+          "observations": {
+            "label": "Supplied redacted observations",
+            "format": "array"
+          },
+          "sourceRightsVerified": {
+            "label": "Rights verified (always false)",
+            "format": "boolean"
+          },
+          "liveSourceVerified": {
+            "label": "Live source verified (always false)",
+            "format": "boolean"
+          }
+        }
+      }
+    }
+  }
+}
